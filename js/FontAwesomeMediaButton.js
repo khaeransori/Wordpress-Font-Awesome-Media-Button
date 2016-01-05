@@ -18,7 +18,7 @@ jQuery(function ($) {
   			for (i = 0; i < ICONS.length; i++ ) {
   				_id = ICONS[i];
 
-  				renderHTML = renderHTML + '<span class="icon-wrapper"><a href="#" id="icon-button" title="' + _id + '" data-id="' + _id + '"><i class="fa fa-' + _id + '"></i></a></span>';
+  				renderHTML = renderHTML + '<div class="icon-wrapper"><a href="#" id="icon-button" title="' + _id + '" data-id="' + _id + '"><i class="fa fa-' + _id + '"></i></a></div>';
   			}
 
         renderHTML = renderHTML + '</p></div>';
