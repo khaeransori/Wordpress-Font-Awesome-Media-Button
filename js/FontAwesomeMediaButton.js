@@ -8,27 +8,34 @@ jQuery(function ($) {
   var FontAwesomeIcon = {
     init: function () {
       $('#font-awesome-media-button').click(function (e) {
-        console.info('masuk');
         e.preventDefault();
 
         var i,
   				_id,
-  				renderHTML = '<p>';
+  				renderHTML;
 
+        renderHTML = '<div><div class="font-awesome-shortcode-checkbox-wrapper"><input type="checkbox" id="font-awesome-shortcode-checkbox"> Shortcode</div><p>';
   			for (i = 0; i < ICONS.length; i++ ) {
   				_id = ICONS[i];
 
   				renderHTML = renderHTML + '<span class="icon-wrapper"><a href="#" id="icon-button" title="' + _id + '" data-id="' + _id + '"><i class="fa fa-' + _id + '"></i></a></span>';
   			}
 
-        renderHTML = renderHTML + '</p>';
+        renderHTML = renderHTML + '</p></div>';
         $(renderHTML).modal({
           onShow: function (dialog) {
             $("a#icon-button").click(function (e) {
               e.preventDefault();
 
               var _id = $(this).data("id");
-              wp.media.editor.insert('<i class="fa fa-' + _id + '"><!-- ' + _id +' --></i> ');
+
+              var shortcode = $('#font-awesome-shortcode-checkbox').is(':checked');
+
+              if (shortcode) {
+                wp.media.editor.insert('[fa-icon icon="' + _id + '"]');
+              } else {
+                wp.media.editor.insert('<i class="fa fa-' + _id + '"><!-- ' + _id +' --></i> ');
+              }
             });
           }
         });

@@ -37,6 +37,7 @@ class FontAwesomeMediaButton
     add_action( 'init', array( $this, 'register_plugin_styles' ) );
     add_action( 'init', array( $this, 'register_plugin_scripts' ) );
     add_action( 'media_buttons', array($this, 'register_media_button'), 15);
+    add_shortcode( 'fa-icon', array( $this, 'setup_shortcode' ) );
   }
 
   public function register_plugin_styles() {
@@ -53,7 +54,15 @@ class FontAwesomeMediaButton
 
   public function register_media_button()
   {
-     echo '<a href="#" id="font-awesome-media-button" class="button">Add Font Awesome Icon</a>';
+    $html = '<button type="button" id="font-awesome-media-button" class="button" data-editor="content">';
+    $html .= '<i class="fa fa-flag"><!-- flag --></i> Add Font Awesome Icon</button>';
+
+    echo $html;
+  }
+
+  public function setup_shortcode($params)
+  {
+    return '<i class="fa fa-' . esc_attr( $params['icon'] ) . '"></i>';
   }
 }
 FontAwesomeMediaButton::setup();
